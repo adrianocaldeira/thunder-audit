@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Thunder.Audit.AuditClassProperty, Thunder.Audit" table="AuditClassProperties">
+    <id name="Id">
+      <generator class="identity" />
+    </id>
+    
+    <many-to-one name="Class" column="ClassId" not-null="true" />
+    
+    <property name="Name" not-null="true" length="50" index="NameAuditClassProperties" />
+    <property name="Description" not-null="true" length="500" />
+  </class>
+</hibernate-mapping>

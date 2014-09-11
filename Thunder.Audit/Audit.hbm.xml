@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Thunder.Audit.Audit, Thunder.Audit" table="Audits">
+    <id name="Id">
+      <generator class="identity" />
+    </id>
+
+    <many-to-one name="Type" column="TypeId" not-null="true" />
+    <many-to-one name="Class" column="ClassId" not-null="true" />
+
+    <property name="PersistId" not-null="true" index="PersistIdAudits" />
+    <property name="Description" />
+    <property name="User" column="AuditUser" />
+    <property name="Created" not-null="true" />
+
+    <bag name="Changes" lazy="true">
+      <key column="AuditId"/>
+      <one-to-many class="Thunder.Audit.AuditClassPropertyChange, Thunder.Audit"/>
+    </bag>
+  </class>
+</hibernate-mapping>
