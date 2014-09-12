@@ -116,6 +116,7 @@ CREATE TABLE `audits` (
   `TypeId` smallint(6) NOT NULL,
   `ClassId` int(11) NOT NULL,
   `Reference` varchar(100) NOT NULL,
+  `GroupReference` varchar(100) NOT NULL,
   `Description` varchar(4000) NOT NULL,
   `AuditUser` varchar(100) NOT NULL,
   `Created` datetime NOT NULL,
@@ -124,6 +125,7 @@ CREATE TABLE `audits` (
   KEY `AuditUser_Audits` (`AuditUser`) USING BTREE,
   KEY `ClassId_Audits` (`ClassId`),
   KEY `Reference_Audits` (`Reference`) USING BTREE,
+  KEY `GroupReference_Audits` (`GroupReference`) USING BTREE,
   KEY `TypeId_Audits` (`TypeId`),
   CONSTRAINT `FK_Audit_AuditClass` FOREIGN KEY (`ClassId`) REFERENCES `auditclasses` (`Id`),
   CONSTRAINT `FK_Audit_AuditType` FOREIGN KEY (`TypeId`) REFERENCES `audittypes` (`Id`)
