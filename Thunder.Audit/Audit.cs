@@ -29,6 +29,11 @@ namespace Thunder.Audit
         public virtual string Reference { get; set; }
 
         /// <summary>
+        /// Get or set group reference
+        /// </summary>
+        public virtual string GroupReference { get; set; }
+
+        /// <summary>
         /// Get or set description
         /// </summary>
         public virtual string Description { get; set; }
@@ -47,13 +52,14 @@ namespace Thunder.Audit
         /// Save <see cref="Audit"/>
         /// </summary>
         /// <param name="session"><see cref="ISession"/></param>
-        /// <param name="persistId">Persist id</param>
+        /// <param name="reference">Reference</param>
+        /// <param name="groupReference">Group Reference</param>
         /// <param name="auditClass"><see cref="AuditClass"/></param>
         /// <param name="auditType"><see cref="AuditType"/></param>
         /// <param name="description">Description</param>
         /// <param name="user">User</param>
         /// <returns><see cref="Audit"/></returns>
-        internal static Audit Save(ISession session, string persistId, AuditClass auditClass, AuditType auditType, 
+        internal static Audit Save(ISession session, string reference, string groupReference, AuditClass auditClass, AuditType auditType, 
             string description, string user)
         {
             if (string.IsNullOrEmpty(user)) 
@@ -63,7 +69,8 @@ namespace Thunder.Audit
             {
                 Class = auditClass,
                 Type = auditType,
-                Reference = persistId,
+                Reference = reference,
+                GroupReference = string.IsNullOrEmpty(groupReference) ? reference : groupReference,
                 Created = DateTime.Now,
                 Description = description ?? string.Empty,
                 User = string.IsNullOrEmpty(user) ? "User not informed" : user
@@ -90,7 +97,7 @@ namespace Thunder.Audit
 
             if (auditClass == null) return;
 
-            var audit = Save(session, @event.Id.ToString(), auditClass, AuditType.Update(), 
+            var audit = Save(session, @event.Id.ToString(), auditable.AuditGroupReference, auditClass, AuditType.Update(), 
                 auditable.AuditDescription, auditable.AuditUser);
 
             foreach (var difference in differences)
@@ -118,7 +125,7 @@ namespace Thunder.Audit
 
             var auditable = (IAuditable)@event.Entity;
 
-            Save(session, @event.Id.ToString(), auditClass, AuditType.Insert(),
+            Save(session, @event.Id.ToString(), auditable.AuditGroupReference, auditClass, AuditType.Insert(),
                 auditable.AuditDescription, auditable.AuditUser);
         }
 
@@ -137,7 +144,7 @@ namespace Thunder.Audit
 
             var auditable = (IAuditable)@event.Entity;
 
-            Save(session, @event.Id.ToString(), auditClass, AuditType.Delete(),
+            Save(session, @event.Id.ToString(), auditable.AuditGroupReference, auditClass, AuditType.Delete(),
                 auditable.AuditDescription, auditable.AuditUser);
         }
     }

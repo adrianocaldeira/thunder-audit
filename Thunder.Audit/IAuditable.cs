@@ -14,5 +14,10 @@
         /// Get or set audit user
         /// </summary>
         string AuditUser { get; set; }
+
+        /// <summary>
+        /// Get or set audit group reference
+        /// </summary>
+        string AuditGroupReference { get; set; }
     }
 }

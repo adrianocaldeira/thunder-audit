@@ -10,6 +10,7 @@
     <many-to-one name="Class" column="ClassId" not-null="true" />
 
     <property name="Reference" not-null="true" length="100" />
+    <property name="GroupReference" not-null="true" length="100" />
     <property name="Description" length="4000" not-null="true" />
     <property name="User" column="AuditUser" length="100" not-null="true" />
     <property name="Created" not-null="true" />
