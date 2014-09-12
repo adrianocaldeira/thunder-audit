@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using NHibernate;
 using NHibernate.Event;
 using Thunder.Data.Pattern;
@@ -23,9 +24,9 @@ namespace Thunder.Audit
         public virtual AuditClass Class { get; set; }
 
         /// <summary>
-        /// Get or set persist id
+        /// Get or set reference
         /// </summary>
-        public virtual string PersistId { get; set; }
+        public virtual string Reference { get; set; }
 
         /// <summary>
         /// Get or set description
@@ -55,14 +56,17 @@ namespace Thunder.Audit
         internal static Audit Save(ISession session, string persistId, AuditClass auditClass, AuditType auditType, 
             string description, string user)
         {
+            if (string.IsNullOrEmpty(user)) 
+                user = Thread.CurrentPrincipal.Identity.Name;
+
             var audit = new Audit
             {
                 Class = auditClass,
                 Type = auditType,
-                PersistId = persistId,
+                Reference = persistId,
                 Created = DateTime.Now,
                 Description = description ?? string.Empty,
-                User = user ?? string.Empty
+                User = string.IsNullOrEmpty(user) ? "User not informed" : user
             };
             
             session.Save(audit);

@@ -10,5 +10,7 @@
     
     <property name="Name" not-null="true" length="50" index="NameAuditClassProperties" />
     <property name="Description" not-null="true" length="500" />
+    <property name="Created" not-null="true" />
+    <property name="Updated" not-null="true" />    
   </class>
 </hibernate-mapping>

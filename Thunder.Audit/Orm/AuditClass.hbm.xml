@@ -6,7 +6,9 @@
       <generator class="identity" />
     </id>
 
-    <property name="Name" not-null="true" length="50" index="NameAuditClasses" />
+    <property name="Name" not-null="true" length="100" />
     <property name="Description" not-null="true" length="500" />
+    <property name="Created" not-null="true" />
+    <property name="Updated" not-null="true" />
   </class>
 </hibernate-mapping>

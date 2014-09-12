@@ -9,10 +9,11 @@
     <many-to-one name="Type" column="TypeId" not-null="true" />
     <many-to-one name="Class" column="ClassId" not-null="true" />
 
-    <property name="PersistId" not-null="true" index="PersistIdAudits" />
-    <property name="Description" />
-    <property name="User" column="AuditUser" />
+    <property name="Reference" not-null="true" length="100" />
+    <property name="Description" length="4000" not-null="true" />
+    <property name="User" column="AuditUser" length="100" not-null="true" />
     <property name="Created" not-null="true" />
+    <property name="Updated" not-null="true" />
 
     <bag name="Changes" lazy="true" cascade="all-delete-orphan">
       <key column="AuditId"/>

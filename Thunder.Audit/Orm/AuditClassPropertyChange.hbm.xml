@@ -11,5 +11,7 @@
     
     <property name="OldValue" not-null="true" />
     <property name="NewValue" not-null="true" />
+    <property name="Created" not-null="true" />
+    <property name="Updated" not-null="true" />
   </class>
 </hibernate-mapping>
