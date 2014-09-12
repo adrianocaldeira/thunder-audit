@@ -1,8 +1,18 @@
 ﻿namespace Thunder.Audit
 {
+    /// <summary>
+    /// Auditable 
+    /// </summary>
     public interface IAuditable
     {
-        string AuditableDescription { get; set; }
-        string AuditableUser { get; set; }
+        /// <summary>
+        /// Get or set audit description
+        /// </summary>
+        string AuditDescription { get; set; }
+
+        /// <summary>
+        /// Get or set audit user
+        /// </summary>
+        string AuditUser { get; set; }
     }
 }

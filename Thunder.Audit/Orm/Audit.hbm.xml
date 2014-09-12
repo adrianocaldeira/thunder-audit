@@ -14,7 +14,7 @@
     <property name="User" column="AuditUser" />
     <property name="Created" not-null="true" />
 
-    <bag name="Changes" lazy="true">
+    <bag name="Changes" lazy="true" cascade="all-delete-orphan">
       <key column="AuditId"/>
       <one-to-many class="Thunder.Audit.AuditClassPropertyChange, Thunder.Audit"/>
     </bag>

@@ -23,11 +23,6 @@ namespace Thunder.Audit
         public virtual AuditClass Class { get; set; }
 
         /// <summary>
-        ///     Get or set created date
-        /// </summary>
-        public virtual DateTime Created { get; set; }
-
-        /// <summary>
         /// Get or set persist id
         /// </summary>
         public virtual string PersistId { get; set; }
@@ -92,7 +87,7 @@ namespace Thunder.Audit
             if (auditClass == null) return;
 
             var audit = Save(session, @event.Id.ToString(), auditClass, AuditType.Update(), 
-                auditable.AuditableDescription, auditable.AuditableUser);
+                auditable.AuditDescription, auditable.AuditUser);
 
             foreach (var difference in differences)
             {
@@ -120,7 +115,7 @@ namespace Thunder.Audit
             var auditable = (IAuditable)@event.Entity;
 
             Save(session, @event.Id.ToString(), auditClass, AuditType.Insert(),
-                auditable.AuditableDescription, auditable.AuditableUser);
+                auditable.AuditDescription, auditable.AuditUser);
         }
 
         /// <summary>
@@ -139,7 +134,7 @@ namespace Thunder.Audit
             var auditable = (IAuditable)@event.Entity;
 
             Save(session, @event.Id.ToString(), auditClass, AuditType.Delete(),
-                auditable.AuditableDescription, auditable.AuditableUser);
+                auditable.AuditDescription, auditable.AuditUser);
         }
     }
 }

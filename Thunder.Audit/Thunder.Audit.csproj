@@ -22,6 +22,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Thunder.Audit.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -69,24 +70,24 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Audit.hbm.xml">
+    <None Include="Audit.hbm.xml">
       <SubType>Designer</SubType>
-    </EmbeddedResource>
+    </None>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AuditClass.hbm.xml" />
+    <None Include="AuditClass.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AuditType.hbm.xml" />
+    <None Include="AuditType.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AuditClassProperty.hbm.xml" />
+    <None Include="AuditClassProperty.hbm.xml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="AuditClassPropertyChange.hbm.xml" />
+    <None Include="AuditClassPropertyChange.hbm.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
