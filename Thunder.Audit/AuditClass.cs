@@ -28,7 +28,12 @@ namespace Thunder.Audit
         /// <returns></returns>
         internal static AuditClass Find(ISession session, string name)
         {
-            return session.Query<AuditClass>().FirstOrDefault(x => x.Name == name);
+            var auditClass = session.Query<AuditClass>().FirstOrDefault(x => x.Name == name) ??
+                new AuditClass { Name = name, Description = name };
+
+            session.SaveOrUpdate(auditClass);
+
+            return auditClass;
         }
     }
 }
