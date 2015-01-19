@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using System.Threading;
+using System.Web;
 using NHibernate;
 using NHibernate.Event;
 using Thunder.Data.Pattern;
@@ -64,6 +66,9 @@ namespace Thunder.Audit
         {
             if (string.IsNullOrEmpty(user)) 
                 user = Thread.CurrentPrincipal.Identity.Name;
+
+            if (string.IsNullOrWhiteSpace(user))
+                user = HttpContext.Current.Session[ConfigurationManager.AppSettings["Thunder.Audit.UserKeyInSession"]] as string;
 
             var audit = new Audit
             {
