@@ -78,7 +78,7 @@ namespace Thunder.Audit
                 GroupReference = string.IsNullOrEmpty(groupReference) ? reference : groupReference,
                 Created = DateTime.Now,
                 Description = description ?? string.Empty,
-                User = string.IsNullOrEmpty(user) ? "User not informed" : user
+                User = string.IsNullOrEmpty(user) ? "Unknown" : user
             };
             
             session.Save(audit);
@@ -102,8 +102,13 @@ namespace Thunder.Audit
 
             if (auditClass == null) return;
 
-            var audit = Save(session, @event.Id.ToString(), auditable.AuditGroupReference, auditClass, AuditType.Update(), 
-                auditable.AuditDescription, auditable.AuditUser);
+            var audit = Save(session, 
+                @event.Id.ToString(), 
+                auditable.AuditGroupReference, 
+                auditClass, 
+                AuditType.Update(), 
+                auditable.AuditDescription, 
+                auditable.AuditUser);
 
             foreach (var difference in differences)
             {
