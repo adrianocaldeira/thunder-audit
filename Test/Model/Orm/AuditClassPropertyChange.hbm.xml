@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2">
+  <class name="Thunder.Audit.AuditClassPropertyChange, Thunder.Audit" table="AuditClassPropertyChanges">
+    <id name="Id">
+      <generator class="identity" />
+    </id>
+    
+    <many-to-one name="Audit" column="AuditId" not-null="true" />
+    <many-to-one name="Property" column="PropertyId" not-null="true" />
+    
+    <property name="OldValue" not-null="true" />
+    <property name="NewValue" not-null="true" />
+    <property name="Created" not-null="true" />
+    <property name="Updated" not-null="true" />
+  </class>
+</hibernate-mapping>

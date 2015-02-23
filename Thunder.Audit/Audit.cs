@@ -7,6 +7,7 @@ using System.Web;
 using NHibernate;
 using NHibernate.Event;
 using Thunder.Data.Pattern;
+using Thunder.Extensions;
 
 namespace Thunder.Audit
 {
@@ -67,7 +68,7 @@ namespace Thunder.Audit
             if (string.IsNullOrEmpty(user)) 
                 user = Thread.CurrentPrincipal.Identity.Name;
 
-            if (string.IsNullOrWhiteSpace(user))
+            if (string.IsNullOrWhiteSpace(user) && HttpContext.Current != null && HttpContext.Current.Session != null)
                 user = HttpContext.Current.Session[ConfigurationManager.AppSettings["Thunder.Audit.UserKeyInSession"]] as string;
 
             var audit = new Audit
@@ -102,6 +103,9 @@ namespace Thunder.Audit
 
             if (auditClass == null) return;
 
+            if (string.IsNullOrWhiteSpace(auditable.AuditDescription))
+                auditable.AuditDescription = "{0} updated".With(auditClass.Description);
+
             var audit = Save(session, 
                 @event.Id.ToString(), 
                 auditable.AuditGroupReference, 
@@ -135,6 +139,9 @@ namespace Thunder.Audit
 
             var auditable = (IAuditable)@event.Entity;
 
+            if (string.IsNullOrWhiteSpace(auditable.AuditDescription))
+                auditable.AuditDescription = "{0} inserted".With(auditClass.Description);
+
             Save(session, @event.Id.ToString(), auditable.AuditGroupReference, auditClass, AuditType.Insert(),
                 auditable.AuditDescription, auditable.AuditUser);
         }
@@ -153,6 +160,9 @@ namespace Thunder.Audit
             if (auditClass == null) return;
 
             var auditable = (IAuditable)@event.Entity;
+
+            if (string.IsNullOrWhiteSpace(auditable.AuditDescription))
+                auditable.AuditDescription = "{0} deleted".With(auditClass.Description);
 
             Save(session, @event.Id.ToString(), auditable.AuditGroupReference, auditClass, AuditType.Delete(),
                 auditable.AuditDescription, auditable.AuditUser);
