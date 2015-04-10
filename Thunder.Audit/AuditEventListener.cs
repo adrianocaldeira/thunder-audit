@@ -8,9 +8,7 @@ namespace Thunder.Audit
     public class EventListener : 
         IPreUpdateEventListener,
         IPostInsertEventListener, 
-        IPreDeleteEventListener,
-        IPostCollectionRecreateEventListener,
-        IPostCollectionUpdateEventListener
+        IPreDeleteEventListener
     {
         /// <summary>
         /// Return true if the operation should be vetoed
@@ -39,16 +37,6 @@ namespace Thunder.Audit
         public void OnPostInsert(PostInsertEvent @event)
         {
             Audit.Save(@event);
-        }
-
-        public void OnPostRecreateCollection(PostCollectionRecreateEvent @event)
-        {
-            var a = @event;
-        }
-
-        public void OnPostUpdateCollection(PostCollectionUpdateEvent @event)
-        {
-            var a = @event;
         }
     }
 }
