@@ -16,6 +16,9 @@ namespace Thunder.Audit
             if (!@event.Entity.GetType().GetInterfaces().Contains(typeof(IAuditable))) 
                 return new List<AuditDifference>();
 
+            if (@event.OldState == null)
+                return new List<AuditDifference>();
+
             var indexes = @event.Persister.FindDirty(@event.State, @event.OldState, @event.Entity, @event.Session);
             var list = new List<AuditDifference>();
 

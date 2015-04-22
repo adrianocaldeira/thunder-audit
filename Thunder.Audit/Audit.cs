@@ -71,6 +71,15 @@ namespace Thunder.Audit
             if (string.IsNullOrWhiteSpace(user) && HttpContext.Current != null && HttpContext.Current.Session != null)
                 user = HttpContext.Current.Session[ConfigurationManager.AppSettings["Thunder.Audit.UserKeyInSession"]] as string;
 
+            if (string.IsNullOrWhiteSpace(description))
+            {
+                if(auditType.IsUpdate)
+                    description = "{0} updated".With(auditClass.Description);
+
+                if (auditType.IsInsert)
+                    description = "{0} inserted".With(auditClass.Description);
+            }
+
             var audit = new Audit
             {
                 Class = auditClass,

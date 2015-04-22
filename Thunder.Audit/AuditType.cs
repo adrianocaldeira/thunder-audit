@@ -46,5 +46,13 @@ namespace Thunder.Audit
         {
             get { return Equals(this, Update()); }
         }
+
+        /// <summary>
+        /// Is insert
+        /// </summary>
+        public virtual bool IsInsert
+        {
+            get { return Equals(this, Insert()); }
+        }
     }
 }
