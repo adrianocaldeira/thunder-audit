@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using NHibernate.Event;
 using Test.Model;
 using Thunder.Audit;
-using Thunder.Data;
+using Thunder.NHibernate;
+using Thunder.NHibernate.Pattern;
 
 namespace Test
 {
@@ -13,6 +11,14 @@ namespace Test
     {
         static void Main(string[] args)
         {
+            SessionManager.Listeners = new Dictionary<ListenerType, object[]>
+            {
+                {ListenerType.PreInsert, new IPreInsertEventListener[] {new CreatedAndUpdatedPropertyEventListener()}},
+                {ListenerType.PreUpdate, new IPreUpdateEventListener[] {new CreatedAndUpdatedPropertyEventListener(), new EventListener()}},
+                {ListenerType.PreDelete, new IPreDeleteEventListener[] {new EventListener()}},
+                {ListenerType.PostInsert, new IPostInsertEventListener[] {new EventListener()}},
+            };
+
             SessionManager.Bind();
 
             SessionManager.CurrentSession.Save(new AuditType { Id = 1, Name = "Insert" });

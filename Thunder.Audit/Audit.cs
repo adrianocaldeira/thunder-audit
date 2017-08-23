@@ -6,7 +6,7 @@ using System.Threading;
 using System.Web;
 using NHibernate;
 using NHibernate.Event;
-using Thunder.Data.Pattern;
+using Thunder.Data;
 using Thunder.Extensions;
 
 namespace Thunder.Audit

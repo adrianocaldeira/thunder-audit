@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using NHibernate;
 using NHibernate.Linq;
-using Thunder.Data.Pattern;
+using Thunder.Data;
 
 namespace Thunder.Audit
 {

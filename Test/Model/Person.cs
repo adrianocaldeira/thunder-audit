@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using Thunder.Audit;
-using Thunder.Data.Pattern;
+using Thunder.Data;
 
 namespace Test.Model
 {

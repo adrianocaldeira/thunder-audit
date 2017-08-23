@@ -1,4 +1,4 @@
-﻿using Thunder.Data.Pattern;
+﻿using Thunder.Data;
 
 namespace Thunder.Audit
 {
